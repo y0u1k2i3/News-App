@@ -1,6 +1,4 @@
-import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -18,10 +16,25 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
+// 記事データの型を定義
+type Article = {
+  source: {
+    id: string | null;
+    name: string;
+  };
+  author: string;
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+  publishedAt: string;
+  content: string;
+};
+
 function NewsList() {
-  const [news, setNews] = useState([]);
-  const base_url = import.meta.env.VITE_NewsAPI;
-  const api = import.meta.env.VITE_NewsAPI_Key;
+  const [news, setNews] = useState<Article[]>([]);
+  const base_url = import.meta.env.VITE_GNewsAPI;
+  const api = import.meta.env.VITE_GNewsAPI_Key;
   const url = `${base_url}${api}`;
 
   const getNews = async () => {
@@ -29,6 +42,8 @@ function NewsList() {
       const response = await fetch(url);
       const data = await response.json();
       setNews(data.articles);
+      console.log(data.articles);
+
     } catch (err) {
       console.log(err, "Failed to fetch news");
     }
@@ -47,7 +62,7 @@ function NewsList() {
             <Grid size={4} key={index}>
               <Item className="news-item">
                 <h3>{each_news.title}</h3>
-                <img src={each_news.urlToImage} alt="" className="news__img"/>
+                <img src={each_news.image} alt="" className="news__img"/>
                 <p>{each_news.description}</p>
               </Item>
             </Grid>
