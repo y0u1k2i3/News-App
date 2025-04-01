@@ -7,7 +7,7 @@
     "dev": "vite",
     "build2": "tsc -b && vite build",
     "build": "webpack",
-    "start": "node dist/server.bundle.js",
+    "start": "node dist/server.bundle.cjs",
     "develop": "webpack-dev-server --open",
     "lint": "eslint .",
     "preview": "vite preview",

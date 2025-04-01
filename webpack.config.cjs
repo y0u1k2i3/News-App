@@ -2,8 +2,6 @@ const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
-  // 本番にデプロイするときはモード値を production に設定
-  // development に設定すると元のファイルとの関連性がわかるソースマップと一緒に出力される
   mode: "development",
   target: "node",
   externals: [nodeExternals()], // node_modules をバンドルしない
@@ -12,8 +10,8 @@ module.exports = {
   entry: "./server/index.js", // ビルド元のファイル
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "server.bundle.js", // ビルド後のファイル
-    libraryTarget: "module", // CommonJS 形式で出力
+    filename: "server.bundle.cjs", // ビルド後のファイル
+    libraryTarget: "commonjs2", // CommonJS形式で出力
   },
   experiments: {
     outputModule: true, // Webpack 5 以降で libraryTarget: "module" を有効にする
