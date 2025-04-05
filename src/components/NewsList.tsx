@@ -33,8 +33,8 @@ type Article = {
 
 function NewsList() {
   const [news, setNews] = useState<Article[]>([]);
-  const base_url = import.meta.env.VITE_GNewsAPI;
-  const api = import.meta.env.VITE_GNewsAPI_Key;
+  const base_url = process.env.VITE_GNewsAPI;
+  const api = process.env.VITE_GNewsAPI_Key;
   const url = `${base_url}${api}`;
 
   const getNews = async () => {
